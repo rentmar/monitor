@@ -6,6 +6,7 @@ class ReformaElectoral extends CI_Controller{
         parent::__construct();
         $this->load->helper('url');
         $this->load->helper('form');
+		$this->load->model('Otrotema_model');
     }
 
     public function index()
@@ -21,8 +22,14 @@ class ReformaElectoral extends CI_Controller{
 
     public function capturarDatos()
     {
-
+		$dtotrotema=array(
+					'otro_tema'=>'aqui los datos otro tema',
+					'rel_idtema'=>11);
+		$idotrotema=$this->Otrotema_model->insertaOtroTema($dtotrotema);
+		$dtotrosubtema=array(
+					'otro_subtema'=>'aqui los datos otro subtema',
+					'rel_idsubtema'=>22);
+		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);
+		
     }
-
-
 }
