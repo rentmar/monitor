@@ -21,8 +21,28 @@ class ReformaElectoral extends CI_Controller{
 
     public function capturarDatos()
     {
-
+        $fechaMesDiaAno=$this->input->post('fecha');
+        $fechaDeNoticia=$this->fecha_unix($fechaMesDiaAno);
+        $titularDeNoticia=$this->input->post('titular');
+        $resumenDeNoticia=$this->input->post('resumen');
+        $urlDeNoticia=$this->input->post('url');
+        $relacionIdActor=$this->input->post('relIdActor');
+        $relacionDeSubtema=$this->input->post('relDeSubtema');
+        
+        $DatosDeNoticia['fecha']=$fechaDeNoticia;
+        $DatosDeNoticia['titular']=$titularDeNoticia;
+        $DatosDeNoticia['resumen']=$resumenDeNoticia;
+        $DatosDeNoticia['url']=$urlDeNoticia;
+        $DatosDeNoticia['rel_idactor']=$relacionIdActor;
+        $DatosDeNoticia['rel_subtema']=$relacionDeSubtema;
+        
+        $idinv=$this->ReformaElectoral_modelo->insertarDatosNoticia($DatosDeNoticia);
     }
-
-
+    
+    //Cambiar el formato MM/DD/YY a unix timestamp
+    private function fecha_unix($fecha) {
+        list($anio, $mes, $dia) = explode('-', $fecha);
+        $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+        return $fecha_unix;
+    }
 }
