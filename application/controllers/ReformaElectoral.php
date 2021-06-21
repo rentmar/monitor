@@ -18,4 +18,11 @@ class ReformaElectoral extends CI_Controller{
         /**** PIE ****/
         $this->load->view('html/pie.php');
     }
+
+    public function capturarDatos()
+    {
+
+    }
+
+
 }
