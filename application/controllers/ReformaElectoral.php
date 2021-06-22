@@ -106,5 +106,17 @@ class ReformaElectoral extends CI_Controller{
         echo json_encode($json);
     }
 
+    public function resumen()
+    {
+        $this->load->view("html/encabezado.php");
+        $this->load->view('html/navbar');
+
+        $this->load->view('formularios/vresumen_reforma_electoral');
+
+        /**** PIE ****/
+        $this->load->view('html/pie.php');
+
+    }
+
 
 }
