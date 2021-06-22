@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-06-2021 a las 15:16:55
+-- Tiempo de generación: 22-06-2021 a las 17:42:37
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.1.29
 
@@ -91,6 +91,18 @@ CREATE TABLE `noticia` (
   `url` varchar(255) NOT NULL,
   `rel_idactor` int(11) NOT NULL,
   `rel_subtema` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_medio`
+--
+
+CREATE TABLE `noticia_medio` (
+  `idnoticiamedio` int(11) NOT NULL,
+  `rel_idnoticia` int(11) NOT NULL,
+  `rel_idmedio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -235,6 +247,14 @@ ALTER TABLE `noticia`
   ADD KEY `fk_relacion_subtema` (`rel_subtema`);
 
 --
+-- Indices de la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  ADD PRIMARY KEY (`idnoticiamedio`),
+  ADD KEY `fk_rel_noticia` (`rel_idnoticia`),
+  ADD KEY `fk_rel_medio` (`rel_idmedio`);
+
+--
 -- Indices de la tabla `otro_subtema`
 --
 ALTER TABLE `otro_subtema`
@@ -290,6 +310,12 @@ ALTER TABLE `noticia`
   MODIFY `idnoticia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `otro_subtema`
 --
 ALTER TABLE `otro_subtema`
@@ -335,6 +361,13 @@ ALTER TABLE `medio_comunicacion`
 ALTER TABLE `noticia`
   ADD CONSTRAINT `fk_relacion_actor` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
   ADD CONSTRAINT `fk_relacion_subtema` FOREIGN KEY (`rel_subtema`) REFERENCES `subtema` (`idsubtema`);
+
+--
+-- Filtros para la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  ADD CONSTRAINT `fk_rel_medio` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  ADD CONSTRAINT `fk_rel_noticia` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
 
 --
 -- Filtros para la tabla `otro_subtema`
