@@ -4,6 +4,7 @@
 class Interfaz_model extends CI_Model
 {
     private $_tipomedioID;
+    private $_temaID;
     public function __construct()
     {
         parent::__construct();
@@ -11,6 +12,11 @@ class Interfaz_model extends CI_Model
     }
     public function setTipoMedioID($tipomedioID) {
         return $this->_tipomedioID = $tipomedioID;
+    }
+
+    public function setTemaID($temaID)
+    {
+        return $this->_temaID = $temaID;
     }
 
     public function getAllTipos() {
@@ -37,6 +43,15 @@ class Interfaz_model extends CI_Model
     public function leerTema()
     {
         $query = $this->db->get('tema');
+        return $query->result_array();
+    }
+
+    public function leerSubtema()
+    {
+        $this->db->select(array('s.idsubtema as stema_id', 's.rel_idtema', 's.nombre_subtema as stema_name'));
+        $this->db->from('subtema as s');
+        $this->db->where('s.rel_idtema', $this->_temaID);
+        $query = $this->db->get();
         return $query->result_array();
     }
 }

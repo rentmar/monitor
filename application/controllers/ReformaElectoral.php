@@ -8,7 +8,7 @@ class ReformaElectoral extends CI_Controller{
         $this->load->helper('form');
         $this->load->model('Interfaz_model');
 		$this->load->model('Otrotema_model');
-
+		$this->load->model('Graficos_model');
 		$this->load->model('ReformaElectoral_modelo');
 		
 		$this->load->library('phplot');
@@ -55,6 +55,12 @@ class ReformaElectoral extends CI_Controller{
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
         $relacionIdmedio = $this->input->post('medio');
+
+        //identificador del tema seleccionado
+        $idtema = $this->input->post('tema');
+
+        //Identificador de subtema seleccionado
+        $idsubtema = $this->input->post('idsubtema');
         
         $nombreTipoDeMedio=$this->input->post('nombreTipo');
         $nombreDeMedio=$this->input->post('nombreMedio');
@@ -96,10 +102,32 @@ class ReformaElectoral extends CI_Controller{
         header('Content-Type: application/json');
         echo json_encode($json);
     }
+
 	 
 	public function graficador() {
-     
-		$this->load->view('vgraficador');
+		$datos['dtsactor']=array();
+		$numTotalActores=$this->Graficos_model->numeroTotalActores();
+		$actores=$this->Graficos_model->leerActores();
+		foreach ($actores as $a)
+		{
+			$cantidad=$this->Graficos_model->numeroNoticiasActor($a->idactor);
+			$valporcentual=($cantidad/$numTotalActores)*100;
+			array_push($datos['dtsactor'],array('',$valporcentual));
+		}
+		
+		$this->load->view('vgraficador',$datos);
     }
+
+
+    public function getsubtema()
+    {
+        $json = array();
+        $this->Interfaz_model->setTemaID($this->input->post('temaID'));
+        $json = $this->Interfaz_model->leerSubtema();
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
+
 
 }

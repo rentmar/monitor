@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-06-2021 a las 03:11:07
+-- Tiempo de generación: 22-06-2021 a las 17:42:37
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.1.29
 
@@ -74,7 +74,8 @@ INSERT INTO `medio_comunicacion` (`idmedio`, `nombre_medio`, `rel_idtipomedio`) 
 (6, 'Pagina Siete', 4),
 (7, 'Panamericana', 3),
 (8, 'Fides', 3),
-(9, 'ERBOL', 3);
+(9, 'ERBOL', 3),
+(10, 'Facebook', 1);
 
 -- --------------------------------------------------------
 
@@ -90,6 +91,18 @@ CREATE TABLE `noticia` (
   `url` varchar(255) NOT NULL,
   `rel_idactor` int(11) NOT NULL,
   `rel_subtema` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_medio`
+--
+
+CREATE TABLE `noticia_medio` (
+  `idnoticiamedio` int(11) NOT NULL,
+  `rel_idnoticia` int(11) NOT NULL,
+  `rel_idmedio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -154,7 +167,10 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 (19, 'Estrategia de educación cívica y ciudadana', 9),
 (20, 'Papel de los medios de comunicación en campaña electoral', 9),
 (21, 'Financiamiento en etapas electorales y no electorales', 10),
-(22, 'Otra', 11);
+(22, 'Otra', 11),
+(23, 'Redistribución de escaños a nivel nacional', 3),
+(24, 'Redistribución de escaños a nivel departamental', 3),
+(25, 'Redistribución del número de concejales del municipio', 3);
 
 -- --------------------------------------------------------
 
@@ -231,6 +247,14 @@ ALTER TABLE `noticia`
   ADD KEY `fk_relacion_subtema` (`rel_subtema`);
 
 --
+-- Indices de la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  ADD PRIMARY KEY (`idnoticiamedio`),
+  ADD KEY `fk_rel_noticia` (`rel_idnoticia`),
+  ADD KEY `fk_rel_medio` (`rel_idmedio`);
+
+--
 -- Indices de la tabla `otro_subtema`
 --
 ALTER TABLE `otro_subtema`
@@ -277,13 +301,19 @@ ALTER TABLE `actor`
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
 --
 ALTER TABLE `medio_comunicacion`
-  MODIFY `idmedio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idmedio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
   MODIFY `idnoticia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `otro_subtema`
@@ -301,7 +331,7 @@ ALTER TABLE `otro_tema`
 -- AUTO_INCREMENT de la tabla `subtema`
 --
 ALTER TABLE `subtema`
-  MODIFY `idsubtema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idsubtema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
@@ -331,6 +361,13 @@ ALTER TABLE `medio_comunicacion`
 ALTER TABLE `noticia`
   ADD CONSTRAINT `fk_relacion_actor` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
   ADD CONSTRAINT `fk_relacion_subtema` FOREIGN KEY (`rel_subtema`) REFERENCES `subtema` (`idsubtema`);
+
+--
+-- Filtros para la tabla `noticia_medio`
+--
+ALTER TABLE `noticia_medio`
+  ADD CONSTRAINT `fk_rel_medio` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  ADD CONSTRAINT `fk_rel_noticia` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
 
 --
 -- Filtros para la tabla `otro_subtema`
