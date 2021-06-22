@@ -53,6 +53,39 @@
 
             </div>
         </div>
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="titular">Escriba el titular de la noticia </label>
+                    <input type="text" class="form-control" id="titular" name="titular" >
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="resumen">Escriba un pequeño párrafo que resuma la noticia</label>
+                    <input type="text" class="form-control" id="resumen" name="resumen" >
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="url">Pegue el link donde se encuentra la noticia</label>
+                    <input type="text" class="form-control" id="url" name="url" >
+                </div>
+            </div>
+        </div>
+        <br>
+
+
 
 
 
