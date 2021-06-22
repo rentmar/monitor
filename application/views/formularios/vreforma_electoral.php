@@ -96,7 +96,7 @@
                        <?php foreach ($actor as $key => $element): ?>
                             <?php if($contador == 0): ?>
                                <div class="form-check">
-                                   <label class="form-check-label" for="radio1">
+                                   <label class="form-check-label" for="radio<?php echo $element['idactor']; ?>">
                                        <input type="radio" class="form-check-input" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" checked>
                                        <?php echo $element['actor_nombre']; ?>
                                    </label>
@@ -123,7 +123,7 @@
                 <div class="form-group">
                     <label for="nombre_tipo" >Escoge el tema al que está referido la nota:</label>
                     <select class="form-control" id="tema" name="tema">
-                        <option value=" ">Seleccione Tipo de Medio</option>
+                        <option value=" ">Seleccione Tema</option>
                         <?php foreach ( $tema as $key => $element): ?>
                             <option value="<?php echo $element['idtema']; ?>" >
                                 <?php echo $element['nombre_tema']; ?>
@@ -134,6 +134,11 @@
 
                 </div>
             </div>
+        </div>
+        <br>
+
+        <div id="subtemacard" class="card">
+
         </div>
         <br>
 

@@ -50,7 +50,13 @@ class ReformaElectoral extends CI_Controller{
         $urlDeNoticia=$this->input->post('url');
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
-        $relacionIdmedio=$this->input->post('medio');
+        $relacionIdmedio = $this->input->post('medio');
+
+        //identificador del tema seleccionado
+        $idtema = $this->input->post('tema');
+
+        //Identificador de subtema seleccionado
+        $idsubtema = $this->input->post('idsubtema');
         
         $nombreTipoDeMedio=$this->input->post('nombreTipo');
         $nombreDeMedio=$this->input->post('nombreMedio');
@@ -89,6 +95,15 @@ class ReformaElectoral extends CI_Controller{
         $json = array();
         $this->Interfaz_model->setTipoMedioID($this->input->post('tipomedioID'));
         $json = $this->Interfaz_model->leerMedios();
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
+    public function getsubtema()
+    {
+        $json = array();
+        $this->Interfaz_model->setTemaID($this->input->post('temaID'));
+        $json = $this->Interfaz_model->leerSubtema();
         header('Content-Type: application/json');
         echo json_encode($json);
     }

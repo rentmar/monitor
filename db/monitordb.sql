@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-06-2021 a las 03:11:07
+-- Tiempo de generación: 22-06-2021 a las 15:16:55
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.1.29
 
@@ -74,7 +74,8 @@ INSERT INTO `medio_comunicacion` (`idmedio`, `nombre_medio`, `rel_idtipomedio`) 
 (6, 'Pagina Siete', 4),
 (7, 'Panamericana', 3),
 (8, 'Fides', 3),
-(9, 'ERBOL', 3);
+(9, 'ERBOL', 3),
+(10, 'Facebook', 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +155,10 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 (19, 'Estrategia de educación cívica y ciudadana', 9),
 (20, 'Papel de los medios de comunicación en campaña electoral', 9),
 (21, 'Financiamiento en etapas electorales y no electorales', 10),
-(22, 'Otra', 11);
+(22, 'Otra', 11),
+(23, 'Redistribución de escaños a nivel nacional', 3),
+(24, 'Redistribución de escaños a nivel departamental', 3),
+(25, 'Redistribución del número de concejales del municipio', 3);
 
 -- --------------------------------------------------------
 
@@ -277,7 +281,7 @@ ALTER TABLE `actor`
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
 --
 ALTER TABLE `medio_comunicacion`
-  MODIFY `idmedio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idmedio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
@@ -301,7 +305,7 @@ ALTER TABLE `otro_tema`
 -- AUTO_INCREMENT de la tabla `subtema`
 --
 ALTER TABLE `subtema`
-  MODIFY `idsubtema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idsubtema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
