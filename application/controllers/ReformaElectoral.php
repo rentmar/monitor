@@ -7,6 +7,7 @@ class ReformaElectoral extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
 		$this->load->model('Otrotema_model');
+		$this->load->model('ReformaElectoral_modelo');
     }
 
     public function index()
@@ -33,7 +34,7 @@ class ReformaElectoral extends CI_Controller{
 		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);
 		
 
-        $fechaMesDiaAno=$this->input->post('fecha');
+		$fechaMesDiaAno=$this->input->post('fecha');
         $fechaDeNoticia=$this->fecha_unix($fechaMesDiaAno);
         $titularDeNoticia=$this->input->post('titular');
         $resumenDeNoticia=$this->input->post('resumen');
