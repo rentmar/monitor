@@ -20,6 +20,8 @@ class ReformaElectoral extends CI_Controller{
 
 
         $datos['tipo_medio'] = $this->Interfaz_model->getAlltipos();
+        $datos['actor'] = $this->Interfaz_model->leerActor();
+        $datos['tema'] = $this->Interfaz_model->leerTema();
 
 
 
@@ -52,6 +54,12 @@ class ReformaElectoral extends CI_Controller{
         $urlDeNoticia=$this->input->post('url');
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
+        $relacionIdmedio = $this->input->post('medio');
+        
+        $nombreTipoDeMedio=$this->input->post('nombreTipo');
+        $nombreDeMedio=$this->input->post('nombreMedio');
+        
+        $idTipoDeMedio=$this->ReformaElectoral_modelo->insertarDatosTipoMedio($nombreTipoDeMedio);
         
         $DatosDeNoticia['fecha']=$fechaDeNoticia;
         $DatosDeNoticia['titular']=$titularDeNoticia;
@@ -60,7 +68,17 @@ class ReformaElectoral extends CI_Controller{
         $DatosDeNoticia['rel_idactor']=$relacionIdActor;
         $DatosDeNoticia['rel_subtema']=$relacionDeSubtema;
         
-        $idinv=$this->ReformaElectoral_modelo->insertarDatosNoticia($DatosDeNoticia);
+        $idNoticia=$this->ReformaElectoral_modelo->insertarDatosNoticia($DatosDeNoticia);
+        
+        $DatosDeMedioComunicacion['nombre_medio']=$nombreDeMedio;
+        $DatosDeMedioComunicacion['rel_idtipomedio']=$idTipoDeMedio;
+        
+        $idMedio=$this->ReformaElectoral_modelo->insertarDatosMedioComunicacion($DatosDeMedioComunicacion);
+        
+        $DatosDeNoticiaMedio['rel_idnoticia']=$idNoticia;
+        $DatosDeNoticiaMedio['rel_idmedio']=$idMedio;
+        
+        $idNoticiaMedio=$this->ReformaElectoral_modelo->insertarDatosNoticiaMedio($DatosDeNoticiaMedio);
     }
     
     //Cambiar el formato MM/DD/YY a unix timestamp

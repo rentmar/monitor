@@ -27,4 +27,16 @@ class Interfaz_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function leerActor()
+    {
+        $query = $this->db->get('actor');
+        return $query->result_array();
+    }
+
+    public function leerTema()
+    {
+        $query = $this->db->get('tema');
+        return $query->result_array();
+    }
 }
