@@ -10,8 +10,8 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 jQuery(document).on('change', 'select#tema', function (e) {
     e.preventDefault();
     var temaID = jQuery(this).val();
-    getSubtemaList(temaID);
-
+    var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
+    getSubtemaList(temaID, temaTitulo);
 });
 
 
@@ -42,7 +42,7 @@ function getMediosList(tipomedioID) {
     });
 }
 
-function getSubtemaList(temaID) {
+function getSubtemaList(temaID, temaTitulo) {
     $.ajax({
         url: baseurl + "/reformaElectoral/getsubtema",
         type: 'post',
@@ -55,12 +55,49 @@ function getSubtemaList(temaID) {
             // code
         },
         success: function (json) {
-            var options = '';
-            options +='<option value="">Seleccionar un Subtema</option>';
-            for (var i = 0; i < json.length; i++) {
-                options += '<option value="' + json[i].stema_id + '">' + json[i].stema_name + '</option>';
+            if(temaID != 11) {
+                var contador = 0;
+                var tarjeta = '';
+                tarjeta += '<div class="card-header bg-info text-white">';
+                tarjeta += '<h4>' + temaTitulo + '<h4>';
+                tarjeta += '</div>';
+                tarjeta += '<div class="card-body">';
+                tarjeta += '<div class="form-check">';
+                for (var i = 0; i < json.length; i++) {
+                    if (contador == 0) {
+                        tarjeta += '<div class="form-check">';
+                        tarjeta += '  <label class="form-check-label" for="radio1">';
+                        tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '" checked>';
+                        tarjeta += '      ' + json[i].stema_name;
+                        tarjeta += '  </label>';
+                        tarjeta += '</div>';
+                        contador++
+
+                    } else {
+                        tarjeta += '<div class="form-check">';
+                        tarjeta += '  <label class="form-check-label" for="radio1">';
+                        tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '">';
+                        tarjeta += '      ' + json[i].stema_name;
+                        tarjeta += '  </label>';
+                        tarjeta += '</div>';
+                    }
+                }
+                if (temaID != 11) {
+                    tarjeta += '<div class="form-check">';
+                    tarjeta += '  <label class="form-check-label" for="radio1">';
+                    tarjeta += '      <input type="radio" class="form-check-input" id="radio" name="idsubtema" value="22">';
+                    tarjeta += '       Otro';
+                    tarjeta += '  </label>';
+                    tarjeta += '</div>';
+                    tarjeta += '</div>';
+                    tarjeta += '</div>';
+                }
             }
-            jQuery("select#subtema").html(options);
+            else{
+                tarjeta = '';
+            }
+
+            jQuery("#subtemacard").html(tarjeta);
 
         },
         error: function (xhr, ajaxOptions, thrownError) {

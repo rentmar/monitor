@@ -51,6 +51,12 @@ class ReformaElectoral extends CI_Controller{
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
         $relacionIdmedio = $this->input->post('medio');
+
+        //identificador del tema seleccionado
+        $idtema = $this->input->post('tema');
+
+        //Identificador de subtema seleccionado
+        $idsubtema = $this->input->post('idsubtema');
         
         $nombreTipoDeMedio=$this->input->post('nombreTipo');
         $nombreDeMedio=$this->input->post('nombreMedio');

@@ -96,7 +96,7 @@
                        <?php foreach ($actor as $key => $element): ?>
                             <?php if($contador == 0): ?>
                                <div class="form-check">
-                                   <label class="form-check-label" for="radio1">
+                                   <label class="form-check-label" for="radio<?php echo $element['idactor']; ?>">
                                        <input type="radio" class="form-check-input" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" checked>
                                        <?php echo $element['actor_nombre']; ?>
                                    </label>
@@ -137,18 +137,10 @@
         </div>
         <br>
 
-        <div class="card">
-            <div class="card-header">
+        <div id="subtemacard" class="card">
 
-
-            </div>
-            <div class="card-body">
-                <select class="form-control" id="subtema" name="subtema">
-                    <option value=""> Seleccione Subtema</option>
-                </select>
-
-            </div>
         </div>
+        <br>
 
 
 
