@@ -78,5 +78,14 @@ class ReformaElectoral extends CI_Controller{
         echo json_encode($json);
     }
 
+    public function getsubtema()
+    {
+        $json = array();
+        $this->Interfaz_model->setTemaID($this->input->post('temaID'));
+        $json = $this->Interfaz_model->leerSubtema();
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
 
 }

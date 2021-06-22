@@ -123,7 +123,7 @@
                 <div class="form-group">
                     <label for="nombre_tipo" >Escoge el tema al que está referido la nota:</label>
                     <select class="form-control" id="tema" name="tema">
-                        <option value=" ">Seleccione Tipo de Medio</option>
+                        <option value=" ">Seleccione Tema</option>
                         <?php foreach ( $tema as $key => $element): ?>
                             <option value="<?php echo $element['idtema']; ?>" >
                                 <?php echo $element['nombre_tema']; ?>
@@ -136,6 +136,19 @@
             </div>
         </div>
         <br>
+
+        <div class="card">
+            <div class="card-header">
+
+
+            </div>
+            <div class="card-body">
+                <select class="form-control" id="subtema" name="subtema">
+                    <option value=""> Seleccione Subtema</option>
+                </select>
+
+            </div>
+        </div>
 
 
 
