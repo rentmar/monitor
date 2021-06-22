@@ -8,7 +8,7 @@
         <br>
 
 
-        <?php echo  form_open('reformaElectoral/capturarDatos');?>
+        <?php echo  form_open('ReformaElectoral/capturarDatos');?>
 
         <!-- Fecha de la noticia -->
         <div class="card">

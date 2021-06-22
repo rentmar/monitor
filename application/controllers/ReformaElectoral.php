@@ -37,14 +37,14 @@ class ReformaElectoral extends CI_Controller{
     public function capturarDatos()
     {
 
-		$dtotrotema=array(
+		/*$dtotrotema=array(
 					'otro_tema'=>'aqui los datos otro tema',
 					'rel_idtema'=>11);
 		$idotrotema=$this->Otrotema_model->insertaOtroTema($dtotrotema);
 		$dtotrosubtema=array(
 					'otro_subtema'=>'aqui los datos otro subtema',
 					'rel_idsubtema'=>22);
-		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);
+		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);*/
 		
 
 		$fechaMesDiaAno=$this->input->post('fecha');
