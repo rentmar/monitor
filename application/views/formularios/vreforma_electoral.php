@@ -85,6 +85,58 @@
         </div>
         <br>
 
+        <div class="card" >
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Escoja el tipo de actor que es la fuente de la noticia </label>
+                </div>
+               <div class="form-group">
+                   <div class="form-check">
+                       <?php $contador = 0; ?>
+                       <?php foreach ($actor as $key => $element): ?>
+                            <?php if($contador == 0): ?>
+                               <div class="form-check">
+                                   <label class="form-check-label" for="radio1">
+                                       <input type="radio" class="form-check-input" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" checked>
+                                       <?php echo $element['actor_nombre']; ?>
+                                   </label>
+                               </div>
+                                <?php $contador++; ?>
+                            <?php else: ?>
+                               <div class="form-check">
+                                   <label class="form-check-label" for="radio2">
+                                       <input type="radio" class="form-check-input" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>">
+                                       <?php echo $element['actor_nombre']; ?>
+                                   </label>
+                               </div>
+                            <?php endif ?>
+
+                       <?php endforeach; ?>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="nombre_tipo" >Escoge el tema al que está referido la nota:</label>
+                    <select class="form-control" id="tema" name="tema">
+                        <option value=" ">Seleccione Tipo de Medio</option>
+                        <?php foreach ( $tema as $key => $element): ?>
+                            <option value="<?php echo $element['idtema']; ?>" >
+                                <?php echo $element['nombre_tema']; ?>
+                            </option>
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <br>
+
 
 
 
@@ -93,7 +145,6 @@
         <!-- Control Submit -->
         <div class="card">
             <div class="card-footer">
-                <input id="url_base" name="url_base" type="hidden" value="<?php echo site_url(); ?>">
                 <button type="submit" class="btn btn-primary" >Enviar</button>
             </div>
 
