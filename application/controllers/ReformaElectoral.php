@@ -16,6 +16,8 @@ class ReformaElectoral extends CI_Controller{
 
 
         $datos['tipo_medio'] = $this->Interfaz_model->getAlltipos();
+        $datos['actor'] = $this->Interfaz_model->leerActor();
+        $datos['tema'] = $this->Interfaz_model->leerTema();
 
 
 
@@ -48,6 +50,7 @@ class ReformaElectoral extends CI_Controller{
         $urlDeNoticia=$this->input->post('url');
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
+        $relacionIdmedio = $this->input->post('medio');
         
         $DatosDeNoticia['fecha']=$fechaDeNoticia;
         $DatosDeNoticia['titular']=$titularDeNoticia;

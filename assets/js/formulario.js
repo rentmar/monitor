@@ -7,6 +7,13 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
     getMediosList(tipomedioID);
 });
 
+jQuery(document).on('change', 'select#tema', function (e) {
+    e.preventDefault();
+    var temaID = jQuery(this).val();
+    alert(temaID);
+});
+
+
 function getMediosList(tipomedioID) {
     $.ajax({
         url: baseurl + "/reformaElectoral/getmedios",
