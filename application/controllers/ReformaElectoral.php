@@ -50,7 +50,7 @@ class ReformaElectoral extends CI_Controller{
         $urlDeNoticia=$this->input->post('url');
         $relacionIdActor=$this->input->post('relIdActor');
         $relacionDeSubtema=$this->input->post('relDeSubtema');
-        $relacionIdmedio = $this->input->post('medio');
+        $relacionIdmedio=$this->input->post('medio');
         
         $nombreTipoDeMedio=$this->input->post('nombreTipo');
         $nombreDeMedio=$this->input->post('nombreMedio');
