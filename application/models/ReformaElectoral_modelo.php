@@ -10,9 +10,20 @@ class ReformaElectoral_modelo extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+        public function insertarDatosTipoMedio($datosDeTablaTipoMedio){
+            $this->db->insert('tipo_medio',$datosDeTablaTipoMedio);
+            return $this->db->insert_id();
+        }
         public function insertarDatosNoticia($datosDeTablaNoticia){
             $this->db->insert('noticia',$datosDeTablaNoticia);
             return $this->db->insert_id();
         }
-
+        public function insertarDatosMedioComunicacion($datosDeTablaMedioComunicacion){
+            $this->db->insert('medio_comunicacion',$datosDeTablaMedioComunicacion);
+            return $this->db->insert_id();
+        }
+        public function insertarDatosNoticiaMedio($datosDeTablaNoticiaMedio){
+            $this->db->insert('noticia_medio',$datosDeTablaNoticiaMedio);
+            return $this->db->insert_id();
+        }
 }
