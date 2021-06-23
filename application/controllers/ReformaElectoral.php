@@ -12,7 +12,6 @@ class ReformaElectoral extends CI_Controller{
 		$this->load->model('ReformaElectoral_modelo');
 		
 		$this->load->library('phplot');
-
     }
 
     public function index()
@@ -22,6 +21,8 @@ class ReformaElectoral extends CI_Controller{
         $datos['tipo_medio'] = $this->Interfaz_model->getAlltipos();
         $datos['actor'] = $this->Interfaz_model->leerActor();
         $datos['tema'] = $this->Interfaz_model->leerTema();
+        
+        
 
 
 
@@ -44,44 +45,40 @@ class ReformaElectoral extends CI_Controller{
 		$dtotrosubtema=array(
 					'otro_subtema'=>'aqui los datos otro subtema',
 					'rel_idsubtema'=>22);
+
 		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);*/
 		
-
 		$fechaMesDiaAno=$this->input->post('fecha');
         $fechaDeNoticia=$this->fecha_unix($fechaMesDiaAno);
         $titularDeNoticia=$this->input->post('titular');
         $resumenDeNoticia=$this->input->post('resumen');
         $urlDeNoticia=$this->input->post('url');
-        $relacionIdActor=$this->input->post('relIdActor');
-        $relacionDeSubtema=$this->input->post('relDeSubtema');
-        $relacionIdmedio = $this->input->post('medio');
+        $actorNombre=$this->input->post('actor_nombre');
+        $idMedio=$this->input->post('medio');
 
+        $DatosDeActor['actor_nombre']=$actorNombre;
+        $idActor=$this->ReformaElectoral_modelo->insertarDatosActor($DatosDeActor);
+        $relacionIdActor=$idActor;
+        
         //identificador del tema seleccionado
         $idtema = $this->input->post('tema');
 
         //Identificador de subtema seleccionado
         $idsubtema = $this->input->post('idsubtema');
-        
-        $nombreTipoDeMedio=$this->input->post('nombreTipo');
-        $nombreDeMedio=$this->input->post('nombreMedio');
-        
-        $idTipoDeMedio=$this->ReformaElectoral_modelo->insertarDatosTipoMedio($nombreTipoDeMedio);
-        
+
+        $relacionIdSubtema=$idsubtema;
+                
         $DatosDeNoticia['fecha']=$fechaDeNoticia;
         $DatosDeNoticia['titular']=$titularDeNoticia;
         $DatosDeNoticia['resumen']=$resumenDeNoticia;
         $DatosDeNoticia['url']=$urlDeNoticia;
         $DatosDeNoticia['rel_idactor']=$relacionIdActor;
-        $DatosDeNoticia['rel_subtema']=$relacionDeSubtema;
+        $DatosDeNoticia['rel_subtema']=$relacionIdSubtema;
         
         $idNoticia=$this->ReformaElectoral_modelo->insertarDatosNoticia($DatosDeNoticia);
+        $relacionIdNoticia=$idNoticia;
         
-        $DatosDeMedioComunicacion['nombre_medio']=$nombreDeMedio;
-        $DatosDeMedioComunicacion['rel_idtipomedio']=$idTipoDeMedio;
-        
-        $idMedio=$this->ReformaElectoral_modelo->insertarDatosMedioComunicacion($DatosDeMedioComunicacion);
-        
-        $DatosDeNoticiaMedio['rel_idnoticia']=$idNoticia;
+        $DatosDeNoticiaMedio['rel_idnoticia']=$relacionIdNoticia;
         $DatosDeNoticiaMedio['rel_idmedio']=$idMedio;
         
         $idNoticiaMedio=$this->ReformaElectoral_modelo->insertarDatosNoticiaMedio($DatosDeNoticiaMedio);
