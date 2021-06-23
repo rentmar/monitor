@@ -7,8 +7,8 @@ class ReformaElectoral extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('Interfaz_model');
-		$this->load->model('Otrotema_model');
-
+        $this->load->model('Otrotema_model');
+        $this->load->model('ReformaElectoral_modelo');
     }
 
     public function index()
@@ -18,6 +18,8 @@ class ReformaElectoral extends CI_Controller{
         $datos['tipo_medio'] = $this->Interfaz_model->getAlltipos();
         $datos['actor'] = $this->Interfaz_model->leerActor();
         $datos['tema'] = $this->Interfaz_model->leerTema();
+        
+        
 
 
 
@@ -41,7 +43,6 @@ class ReformaElectoral extends CI_Controller{
 					'otro_subtema'=>'aqui los datos otro subtema',
 					'rel_idsubtema'=>22);
 		$idotrosubtema=$this->Otrotema_model->insertaOtroSubTema($dtotrosubtema);
-		
 
         $fechaMesDiaAno=$this->input->post('fecha');
         $fechaDeNoticia=$this->fecha_unix($fechaMesDiaAno);
@@ -49,8 +50,9 @@ class ReformaElectoral extends CI_Controller{
         $resumenDeNoticia=$this->input->post('resumen');
         $urlDeNoticia=$this->input->post('url');
         $actorNombre=$this->input->post('actor_nombre');
-        $nombreTipoDeMedio=$this->input->post('tipo-medio');
         $idMedio=$this->input->post('medio');
+        var_dump($idMedio);
+        $idMedio=7;
 
         $DatosDeActor['actor_nombre']=$actorNombre;
         $idActor=$this->ReformaElectoral_modelo->insertarDatosActor($DatosDeActor);
@@ -61,10 +63,10 @@ class ReformaElectoral extends CI_Controller{
 
         //Identificador de subtema seleccionado
         $idsubtema = $this->input->post('idsubtema');
+        var_dump($idsubtema);
+        $idsubtema=3;
         $relacionIdSubtema=$idsubtema;
-        
-        $idTipoDeMedio=$this->ReformaElectoral_modelo->insertarDatosTipoMedio($nombreTipoDeMedio);
-        
+                
         $DatosDeNoticia['fecha']=$fechaDeNoticia;
         $DatosDeNoticia['titular']=$titularDeNoticia;
         $DatosDeNoticia['resumen']=$resumenDeNoticia;

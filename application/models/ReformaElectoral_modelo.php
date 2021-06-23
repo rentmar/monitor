@@ -14,10 +14,10 @@ class ReformaElectoral_modelo extends CI_Model
             $this->db->insert('actor',$datosDeTablaActor);
             return $this->db->insert_id();
         }
-        public function insertarDatosTipoMedio($datosDeTablaTipoMedio){
-            $this->db->insert('tipo_medio',$datosDeTablaTipoMedio);
-            return $this->db->insert_id();
-        }
+//        public function insertarDatosTipoMedio($datosDeTablaTipoMedio){
+//            $this->db->insert('tipo_medio',$datosDeTablaTipoMedio);
+//            return $this->db->insert_id();
+//        }
         public function insertarDatosNoticia($datosDeTablaNoticia){
             $this->db->insert('noticia',$datosDeTablaNoticia);
             return $this->db->insert_id();
