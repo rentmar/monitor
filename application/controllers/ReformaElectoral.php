@@ -103,22 +103,6 @@ class ReformaElectoral extends CI_Controller{
         echo json_encode($json);
     }
 
-	 
-	public function graficador() {
-		$datos['dtsactor']=array();
-		$numTotalActores=$this->Graficos_model->numeroTotalActores();
-		$actores=$this->Graficos_model->leerActores();
-		foreach ($actores as $a)
-		{
-			$cantidad=$this->Graficos_model->numeroNoticiasActor($a->idactor);
-			$valporcentual=($cantidad/$numTotalActores)*100;
-			array_push($datos['dtsactor'],array('',$valporcentual));
-		}
-		
-		$this->load->view('vgraficador',$datos);
-    }
-
-
     public function getsubtema()
     {
         $json = array();
@@ -132,14 +116,55 @@ class ReformaElectoral extends CI_Controller{
     {
         $this->load->view("html/encabezado.php");
         $this->load->view('html/navbar');
+		//--------------------- actor
+		$datos['dtsactor']=array();
+		$numTotalNoticias=$this->Graficos_model->numeroTotalNoticias();
+		$actores=$this->Graficos_model->leerActores();
+		foreach ($actores as $a)
+		{
+			$cantidad=$this->Graficos_model->numeroNoticiasActor($a->idactor);
+			
+			$valporcentual=intval(($cantidad/$numTotalNoticias)*100);
+			array_push($datos['dtsactor'],array($a->actor_nombre,$valporcentual));
+		}
+		//----------------------
+		//-------------------- medios
+		$datos['dtsmedio']=array();
+		$medios=$this->Graficos_model->leerMedios();
+		foreach ($medios as $m)
+		{
+			$cantidad=$this->Graficos_model->numeroNoticiasMedio($m->idmedio);
+			
+			$valporcentual=intval(($cantidad/$numTotalNoticias)*100);
+			array_push($datos['dtsmedio'],array($m->nombre_medio,$valporcentual));
+		}
+		//----------------------
+		//-------------------- tipo medios
+		$datos['dtstipomedio']=array();
+		$tipos=$this->Graficos_model->leerTipoMedios();
+		foreach ($tipos as $t)
+		{
+			$cantidad=$this->Graficos_model->numeroNoticiasTipoMedio($t->idtipomedio);
+			
+			$valporcentual=intval(($cantidad/$numTotalNoticias)*100);
+			array_push($datos['dtstipomedio'],array($t->nombre_tipo,$valporcentual));
+		}
+		//----------------------
+		//-------------------- tema
+		$datos['dtstema']=array();
+		$temas=$this->Graficos_model->leerTemas();
+		foreach ($temas as $te)
+		{
+			$cantidad=$this->Graficos_model->numeroNoticiasTema($te->idtema);
+			
+			$valporcentual=intval(($cantidad/$numTotalNoticias)*100);
+			array_push($datos['dtstema'],array($te->nombre_tema,$valporcentual));
+		}
+		//----------------------
+        $this->load->view('formularios/vresumen_reforma_electoral',$datos);
 
-        $this->load->view('formularios/vresumen_reforma_electoral');
-
-        /**** PIE ****/
         $this->load->view('html/pie.php');
-
+		
     }
-
-
 
 }
